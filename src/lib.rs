@@ -1,5 +1,9 @@
-pub mod problem_1;
-pub mod problem_2;
+// This basically makes the modules availible to the entire 
+// library
+pub mod problem1;
+pub mod problem2;
+pub mod problem3;
+pub mod problem4;
 
 #[cfg(test)]
 mod tests {
@@ -10,3 +14,6 @@ mod tests {
         // unimplemented!();
     }
 }
+
+pub mod test_provided;
+pub mod test_student;
