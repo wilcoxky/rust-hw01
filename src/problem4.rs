@@ -4,8 +4,27 @@
 /// data vector.
 pub fn bloom(data: &Vec<&str>, hashes: [fn(&[u8]) -> u64; 3], value: &str)
         -> bool {
-    // TODO
-    unimplemented!();
+    let max_size = 20;
+    let mut hashed = [false; 20];
+        for hash in &hashes {
+    for item in data {
+            let mut y = hash(item.as_bytes());
+            y = y % max_size;
+            hashed[y as usize] = true;
+        }
+    }
+    let mut test_hashes = [0u64; 3];
+    for (i, hash) in hashes.iter().enumerate() {
+        let y = hash(value.as_bytes()) % max_size;
+        test_hashes[i] = y;
+    }
+    let mut result = true;
+    // println!("{:?}", test_hashes);
+    for hashed_val in &test_hashes {
+        println!("{}", hashed[*hashed_val as usize]);
+        result = result && hashed[*hashed_val as usize];
+    }
+    result
 }
 
 pub fn djb2(bytes: &[u8]) -> u64 {
